@@ -15,17 +15,21 @@ namespace ProjectFeedbackAPI.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly myProjectDatabase _context;
+        private readonly ILogger<ProjectsController> _logger;
 
-        public ProjectsController(myProjectDatabase context)
+        public ProjectsController(myProjectDatabase context, ILogger<ProjectsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Projects
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
-        {
-            return await _context.Projects.ToListAsync();
+        {   
+            var projects = await _context.Projects.ToListAsync();
+            _logger.LogInformation("Made a GET request to the REST API to fetch all projects.");
+            return projects;
         }
 
         // GET: api/Projects/5
@@ -36,14 +40,14 @@ namespace ProjectFeedbackAPI.Controllers
 
             if (project == null)
             {
+                _logger.LogError("Project not found with GET request to the REST API. [project id={}]", id);
                 return NotFound();
             }
-
+            _logger.LogInformation("Made a GET request to the REST API to fetch a project. [project id={}]", id);
             return project;
         }
 
         // PUT: api/Projects/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, Project project)
         {
@@ -74,7 +78,6 @@ namespace ProjectFeedbackAPI.Controllers
         }
 
         // POST: api/Projects
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(Project project)
         {
