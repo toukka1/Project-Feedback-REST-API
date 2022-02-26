@@ -8,14 +8,10 @@ namespace ProjectFeedbackAPI.Model
 {
     public partial class MyProjectDatabase : DbContext
     {
-        public MyProjectDatabase()
-        {
-        }
+        public MyProjectDatabase() { }
 
         public MyProjectDatabase(DbContextOptions<MyProjectDatabase> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public virtual DbSet<Project> Projects { get; set; } = null!;
 
