@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ProjectFeedbackAPI.Model
 {
-    public partial class myProjectDatabase : DbContext
+    public partial class MyProjectDatabase : DbContext
     {
-        public myProjectDatabase()
+        public MyProjectDatabase()
         {
         }
 
-        public myProjectDatabase(DbContextOptions<myProjectDatabase> options)
+        public MyProjectDatabase(DbContextOptions<MyProjectDatabase> options)
             : base(options)
         {
         }

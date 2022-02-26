@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectFeedbackAPI.Model;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<myProjectDatabase>(options =>
+builder.Services.AddDbContext<MyProjectDatabase>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectFeedbackAPI")));
 
 builder.Services.AddControllers();
